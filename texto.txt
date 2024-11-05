@@ -1,0 +1,169 @@
+docker run --name book-mysql -e MYSQL_ROOT_PASSWORD=docker -p 3306:3306 -v book_v_mysql:/var/lib/mysql -d mysql:latest
+
+
+/*
+ *
+ *
+ * [
+    {
+        "titulo": "Dom Casmurro",
+        "autor": "Machado de Assis",
+        "descricao": "Um romance clássico da literatura brasileira que explora temas de ciúme, traição e amor não correspondido."
+    },
+    {
+        "titulo": "1984",
+        "autor": "George Orwell",
+        "descricao": "Uma distopia que aborda os perigos do totalitarismo e a vigilância do governo sobre a vida dos cidadãos."
+    },
+    {
+        "titulo": "O Senhor dos Anéis",
+        "autor": "J.R.R. Tolkien",
+        "descricao": "Uma épica saga de fantasia que segue a jornada de um grupo de heróis para destruir um anel mágico poderoso."
+    },
+    {
+        "titulo": "Grande Sertão: Veredas",
+        "autor": "João Guimarães Rosa",
+        "descricao": "Uma obra-prima da literatura brasileira que mistura elementos de épico, romance e filosofia, ambientada no sertão."
+    },
+    {
+        "titulo": "Cem Anos de Solidão",
+        "autor": "Gabriel García Márquez",
+        "descricao": "Um romance que conta a história de várias gerações da família Buendía em uma pequena vila fictícia na Colômbia."
+    },
+    {
+        "titulo": "A Revolução dos Bichos",
+        "autor": "George Orwell",
+        "descricao": "Uma fábula que satiriza a corrupção do poder, representada por animais que tomam uma fazenda."
+    },
+    {
+        "titulo": "O Morro dos Ventos Uivantes",
+        "autor": "Emily Brontë",
+        "descricao": "Uma história de amor e vingança ambientada na Inglaterra rural do século XIX."
+    },
+    {
+        "titulo": "Orgulho e Preconceito",
+        "autor": "Jane Austen",
+        "descricao": "Um romance que explora as complexidades das relações sociais e amorosas na Inglaterra do início do século XIX."
+    },
+    {
+        "titulo": "O Pequeno Príncipe",
+        "autor": "Antoine de Saint-Exupéry",
+        "descricao": "Um clássico da literatura infantil que aborda temas profundos como o amor, a perda e a busca pelo sentido da vida."
+    },
+    {
+        "titulo": "Moby Dick",
+        "autor": "Herman Melville",
+        "descricao": "Uma obra-prima da literatura americana que narra a busca obsessiva do Capitão Ahab pela baleia branca Moby Dick."
+    },
+    {
+        "titulo": "Memórias Póstumas de Brás Cubas",
+        "autor": "Machado de Assis",
+        "descricao": "Um romance inovador que mistura filosofia, humor e crítica social, narrado por um defunto."
+    },
+    {
+        "titulo": "Crime e Castigo",
+        "autor": "Fiódor Dostoiévski",
+        "descricao": "Um clássico russo que aborda temas como culpa, moralidade e redenção por meio da história de um jovem estudante."
+    },
+    {
+        "titulo": "O Apanhador no Campo de Centeio",
+        "autor": "J.D. Salinger",
+        "descricao": "Um romance que explora a adolescência e o processo de amadurecimento através do olhar do jovem Holden Caulfield."
+    },
+    {
+        "titulo": "O Alquimista",
+        "autor": "Paulo Coelho",
+        "descricao": "Uma história inspiradora sobre um jovem pastor que segue sua jornada em busca de seu tesouro pessoal."
+    },
+    {
+        "titulo": "A Metamorfose",
+        "autor": "Franz Kafka",
+        "descricao": "Um conto surreal sobre um homem que se transforma em um inseto gigante e as consequências desse evento."
+    },
+    {
+        "titulo": "Ulisses",
+        "autor": "James Joyce",
+        "descricao": "Um romance modernista que reconta a Odisseia de Homero em um único dia em Dublin."
+    },
+    {
+        "titulo": "Ensaio Sobre a Cegueira",
+        "autor": "José Saramago",
+        "descricao": "Uma alegoria que narra o colapso da sociedade quando uma epidemia de cegueira súbita atinge uma cidade."
+    },
+    {
+        "titulo": "O Velho e o Mar",
+        "autor": "Ernest Hemingway",
+        "descricao": "A história de um velho pescador cubano que enfrenta uma luta épica para capturar um enorme peixe."
+    },
+    {
+        "titulo": "As Aventuras de Sherlock Holmes",
+        "autor": "Arthur Conan Doyle",
+        "descricao": "Uma coleção de contos que seguem o detetive Sherlock Holmes enquanto ele resolve mistérios complexos."
+    },
+    {
+        "titulo": "Anna Kariênina",
+        "autor": "Liev Tolstói",
+        "descricao": "Um romance russo que explora os dilemas amorosos e sociais através da vida de Anna Kariênina e seus relacionamentos."
+    }
+]
+ *
+ *
+ */
+
+
+ create table usuarios (
+                           id integer primary key ,
+                           nome varchar(255),
+                           email varchar(200) not null
+ );
+
+ create table livros (
+                         id int primary key auto_increment,
+                         usuario_id integer ,
+                         titulo varchar(255),
+                         autor varchar(100),
+                         descricao text,
+                         ano_lancamento integer,
+                         nro_paginas integer,
+
+                         foreign key (usuario_id) references usuarios (id) on delete cascade
+
+ );
+
+
+
+INSERT INTO livros (titulo, autor, descricao, ano_lancamento, nro_paginas) VALUES
+                                                                               ('Dom Casmurro', 'Machado de Assis', 'Um romance clássico da literatura brasileira que explora temas de ciúme, traição e amor não correspondido.', 1899, 208),
+                                                                               ('1984', 'George Orwell', 'Uma distopia que aborda os perigos do totalitarismo e a vigilância do governo sobre a vida dos cidadãos.', 1949, 328),
+                                                                               ('O Senhor dos Anéis', 'J.R.R. Tolkien', 'Uma épica saga de fantasia que segue a jornada de um grupo de heróis para destruir um anel mágico poderoso.', 1954, 1178),
+                                                                               ('Grande Sertão: Veredas', 'João Guimarães Rosa', 'Uma obra-prima da literatura brasileira que mistura elementos de épico, romance e filosofia, ambientada no sertão.', 1956, 624),
+                                                                               ('Cem Anos de Solidão', 'Gabriel García Márquez', 'Um romance que conta a história de várias gerações da família Buendía em uma pequena vila fictícia na Colômbia.', 1967, 417),
+                                                                               ('A Revolução dos Bichos', 'George Orwell', 'Uma fábula que satiriza a corrupção do poder, representada por animais que tomam uma fazenda.', 1945, 112),
+                                                                               ('O Morro dos Ventos Uivantes', 'Emily Brontë', 'Uma história de amor e vingança ambientada na Inglaterra rural do século XIX.', 1847, 416),
+                                                                               ('Orgulho e Preconceito', 'Jane Austen', 'Um romance que explora as complexidades das relações sociais e amorosas na Inglaterra do início do século XIX.', 1813, 279),
+                                                                               ('O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Um clássico da literatura infantil que aborda temas profundos como o amor, a perda e a busca pelo sentido da vida.', 1943, 96),
+                                                                               ('Moby Dick', 'Herman Melville', 'Uma obra-prima da literatura americana que narra a busca obsessiva do Capitão Ahab pela baleia branca Moby Dick.', 1851, 585),
+                                                                               ('Memórias Póstumas de Brás Cubas', 'Machado de Assis', 'Um romance inovador que mistura filosofia, humor e crítica social, narrado por um defunto.', 1881, 160),
+                                                                               ('Crime e Castigo', 'Fiódor Dostoiévski', 'Um clássico russo que aborda temas como culpa, moralidade e redenção por meio da história de um jovem estudante.', 1866, 576),
+                                                                               ('O Apanhador no Campo de Centeio', 'J.D. Salinger', 'Um romance que explora a adolescência e o processo de amadurecimento através do olhar do jovem Holden Caulfield.', 1951, 277),
+                                                                               ('O Alquimista', 'Paulo Coelho', 'Uma história inspiradora sobre um jovem pastor que segue sua jornada em busca de seu tesouro pessoal.', 1988, 208),
+                                                                               ('A Metamorfose', 'Franz Kafka', 'Um conto surreal sobre um homem que se transforma em um inseto gigante e as consequências desse evento.', 1915, 96),
+                                                                               ('Ulisses', 'James Joyce', 'Um romance modernista que reconta a Odisseia de Homero em um único dia em Dublin.', 1922, 730),
+                                                                               ('Ensaio Sobre a Cegueira', 'José Saramago', 'Uma alegoria que narra o colapso da sociedade quando uma epidemia de cegueira súbita atinge uma cidade.', 1995, 310),
+                                                                               ('O Velho e o Mar', 'Ernest Hemingway', 'A história de um velho pescador cubano que enfrenta uma luta épica para capturar um enorme peixe.', 1952, 127),
+                                                                               ('As Aventuras de Sherlock Holmes', 'Arthur Conan Doyle', 'Uma coleção de contos que seguem o detetive Sherlock Holmes enquanto ele resolve mistérios complexos.', 1892, 307),
+                                                                               ('Anna Kariênina', 'Liev Tolstói', 'Um romance russo que explora os dilemas amorosos e sociais através da vida de Anna Kariênina e seus relacionamentos.', 1878, 864);
+
+
+
+                                                                               create table avaliacoes (
+                                                                                   id integer primary key auto_increment,
+                                                                                   usuario_id integer,
+                                                                                   livro_id integer,
+                                                                                   avaliacao text,
+                                                                                   nota integer,
+
+                                                                                   foreign key (usuario_id) references usuarios(id) on delete cascade ,
+                                                                                   foreign key (livro_id) references livros(id) on delete cascade
+                                                                               );
+
